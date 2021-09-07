@@ -56,7 +56,7 @@ export const TodoProvider = ({children}: any) => {
 
   const toggleTodo = (id: string, completed: boolean) => {
     graphqlClient({
-      query: 'TOGGLE_TODO_MUTATION',
+      query: 'TOGGLE_TODO_QUERY',
       variables: {id, completed},
     }).then(() => {
       try {

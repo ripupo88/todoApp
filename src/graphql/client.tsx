@@ -5,8 +5,8 @@ console.log(URI_8BASE, TOKEN);
 type Props = {
   query:
     | 'TODO_LIST_QUERY'
+    | 'TOGGLE_TODO_QUERY'
     | 'CREATE_TODO_MUTATION'
-    | 'TOGGLE_TODO_MUTATION'
     | 'DELETE_TODO_MUTATION'
     | 'EDIT_TODO_MUTATION';
   variables?:
@@ -25,11 +25,12 @@ export const graphqlClient = async ({query, variables}: Props) => {
     },
   });
 
-  if (query === 'TODO_LIST_QUERY') {
+  if (query === 'TODO_LIST_QUERY' || query === 'TOGGLE_TODO_QUERY') {
     const resp = await client.query({
+      variables,
       query: queries[query],
     });
-    response = resp.data.todosList.items;
+    response = resp.data.todosList?.items || undefined;
   } else {
     const resp = await client.mutate({
       variables,
@@ -53,21 +54,19 @@ const queries = {
       }
     }
   `,
+  TOGGLE_TODO_QUERY: gql`
+    query toggleTodo($id: String!, $completed: Boolean!) {
+      toggleTodo(id: $id, completed: $completed) {
+        response
+      }
+    }
+  `,
 };
 
 const mutates = {
   CREATE_TODO_MUTATION: gql`
     mutation TodoCreate($data: TodoCreateInput!) {
       todoCreate(data: $data) {
-        id
-        text
-        completed
-      }
-    }
-  `,
-  TOGGLE_TODO_MUTATION: gql`
-    mutation TodoToggle($id: ID!, $completed: Boolean!) {
-      todoUpdate(filter: {id: $id}, data: {completed: $completed}) {
         id
         text
         completed
