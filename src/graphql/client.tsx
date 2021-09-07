@@ -1,7 +1,7 @@
 import {ApolloClient, InMemoryCache, gql} from '@apollo/client';
 import {TodoList} from '../context/todoContext';
-import {URI_8BASE, TOKEN} from 'react-native-dotenv';
-
+import {URI_8BASE, TOKEN} from '@env';
+console.log(URI_8BASE, TOKEN);
 type Props = {
   query:
     | 'TODO_LIST_QUERY'
