@@ -95,7 +95,7 @@ export const TasksItems = ({item}: Props) => {
         </>
       ) : (
         <>
-          <LongPressGestureHandler onGestureEvent={Eventhandler}>
+          <LongPressGestureHandler onActivated={Eventhandler}>
             <TapGestureHandler numberOfTaps={2} onActivated={doubleTapHandler}>
               <View testID={'TextCont'} style={styles.leftCont}>
                 <Text

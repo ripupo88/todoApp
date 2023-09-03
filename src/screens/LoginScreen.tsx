@@ -9,6 +9,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import {Firebase} from './Firebase';
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
@@ -27,6 +28,7 @@ export const LoginScreen = () => {
         </View>
         <Text style={styles.logoTitle}>To-Do-App</Text>
         <Text style={styles.logoText}>Your Tasks List</Text>
+        <Firebase />
         <Text style={styles.logoText}> in your hands</Text>
       </View>
       <View style={styles.loginCont}>
